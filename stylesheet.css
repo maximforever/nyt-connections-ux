@@ -1,8 +1,53 @@
 body {
-  background: red;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
 }
-body p {
-  color: green;
+
+#board {
+  width: 100%;
+  max-width: 624px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.row {
+  display: flex;
+  gap: 8px;
+  justify-content: space-between;
+  height: 80px;
+}
+
+.cell {
+  background-color: #efefe6;
+  border-radius: 6px;
+  height: 100%;
+  width: 100%;
+  user-select: none;
+  font-family: "Libre Franklin", sans-serif;
+  font-size: 18px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-weight: 600;
+  text-transform: uppercase;
+  transition: transform 0.2s;
+}
+.cell.selected {
+  background: #5a594e;
+  color: white;
+}
+.cell.clicked {
+  transform: scale(0.9);
+}
+.cell:hover {
+  cursor: pointer;
 }
 
 /*# sourceMappingURL=stylesheet.css.map */
