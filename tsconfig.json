@@ -2,6 +2,6 @@
   "compilerOptions": {
     "strict": true,
     "target": "ES2017",
-    "outDir": ""
+    "outDir": "public"
   }
 }
