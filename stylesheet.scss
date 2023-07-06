@@ -98,6 +98,32 @@ body {
   }
 }
 
+#experience-selector {
+  font-family: "Libre Franklin", sans-serif;
+  font-weight: 300;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+
+  #selector-label {
+    padding-bottom: 0.3rem;
+    margin-bottom: 1rem;
+    width: 100%;
+    text-align: center;
+    font-weight: 700;
+    border-bottom: 2px solid black;
+  }
+
+  #checkbox-wrapper {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .one-checkbox {
+    padding-bottom: 0.5rem;
+  }
+}
+
 @keyframes bounce {
   0% {
     transform: translateY(0);

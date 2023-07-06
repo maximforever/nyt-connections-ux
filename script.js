@@ -17,6 +17,7 @@ const wordBank = [
     "Bangkok",
     "Nuuk",
 ];
+let showColors = false;
 const categories = [
     {
         name: "Soft drinks",
@@ -59,6 +60,13 @@ function init() {
     populateCellsWithWords();
     addEventListeners();
 }
+function resetBoard() {
+    currentlySelected = [];
+    const cells = document.querySelectorAll(".cell");
+    cells.forEach((cell) => {
+        cell.className = "cell";
+    });
+}
 function populateCellsWithWords() {
     for (let row = 1; row < 5; row++) {
         for (let column = 1; column < 5; column++) {
@@ -72,14 +80,14 @@ function populateCellsWithWords() {
     }
 }
 function applyBounce(gotWholeCategory, color = "") {
-    const cells = document.querySelectorAll(".cell");
     let delay = 0;
+    const cells = document.querySelectorAll(".cell");
     cells.forEach((cell) => {
         if (cell.textContent !== null &&
             currentlySelected.includes(cell.textContent)) {
             setTimeout(() => {
                 cell.classList.add("highlighted");
-                if (gotWholeCategory) {
+                if (gotWholeCategory && showColors) {
                     cell.classList.add(`winning-${color}`);
                 }
             }, delay);
@@ -90,14 +98,29 @@ function applyBounce(gotWholeCategory, color = "") {
         }
     });
 }
+function cleanUpCellClasses() {
+    const cells = document.querySelectorAll(".cell");
+    cells.forEach((cell) => {
+        cell.classList.remove("clicked");
+    });
+}
+function setUx(kind) {
+    resetBoard();
+    if (kind === "original") {
+        showColors = false;
+    }
+    else {
+        showColors = true;
+    }
+}
 function submitAnswer() {
+    cleanUpCellClasses();
     if (currentlySelected.length !== 4) {
         console.log("there should be 4 guesses");
         return;
     }
     let matchedCategory = null;
     for (const category of categories) {
-        console.log("reviewing ", category.name);
         let gotWholeCategory = true;
         for (const guess of currentlySelected) {
             if (!category.items.includes(guess)) {
@@ -117,7 +140,7 @@ function submitAnswer() {
     }
 }
 function addEventListeners() {
-    var _a;
+    var _a, _b, _c;
     const cells = document.querySelectorAll(".cell");
     cells.forEach((cell) => {
         cell.addEventListener("mousedown", () => {
@@ -147,5 +170,9 @@ function addEventListeners() {
     });
     (_a = document
         .getElementById("submit-answer")) === null || _a === void 0 ? void 0 : _a.addEventListener("click", submitAnswer);
+    (_b = document
+        .getElementById("original-ux")) === null || _b === void 0 ? void 0 : _b.addEventListener("click", () => setUx("original"));
+    (_c = document
+        .getElementById("new-ux")) === null || _c === void 0 ? void 0 : _c.addEventListener("click", () => setUx("new"));
 }
 init();

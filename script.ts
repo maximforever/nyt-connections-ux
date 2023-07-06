@@ -17,6 +17,8 @@ const wordBank = [
   "Nuuk",
 ];
 
+let showColors: boolean = false;
+
 const categories = [
   {
     name: "Soft drinks",
@@ -66,6 +68,14 @@ function init() {
   addEventListeners();
 }
 
+function resetBoard() {
+  currentlySelected = [];
+  const cells = document.querySelectorAll(".cell");
+  cells.forEach((cell) => {
+    cell.className = "cell";
+  });
+}
+
 function populateCellsWithWords() {
   for (let row = 1; row < 5; row++) {
     for (let column = 1; column < 5; column++) {
@@ -84,8 +94,8 @@ function populateCellsWithWords() {
 }
 
 function applyBounce(gotWholeCategory: boolean, color: string = "") {
-  const cells = document.querySelectorAll(".cell");
   let delay = 0;
+  const cells = document.querySelectorAll(".cell");
   cells.forEach((cell) => {
     if (
       cell.textContent !== null &&
@@ -94,7 +104,7 @@ function applyBounce(gotWholeCategory: boolean, color: string = "") {
       setTimeout(() => {
         cell.classList.add("highlighted");
 
-        if (gotWholeCategory) {
+        if (gotWholeCategory && showColors) {
           cell.classList.add(`winning-${color}`);
         }
       }, delay);
@@ -108,7 +118,25 @@ function applyBounce(gotWholeCategory: boolean, color: string = "") {
   });
 }
 
+function cleanUpCellClasses() {
+  const cells = document.querySelectorAll(".cell");
+  cells.forEach((cell) => {
+    cell.classList.remove("clicked");
+  });
+}
+
+function setUx(kind: "original" | "new") {
+  resetBoard();
+
+  if (kind === "original") {
+    showColors = false;
+  } else {
+    showColors = true;
+  }
+}
+
 function submitAnswer() {
+  cleanUpCellClasses();
   if (currentlySelected.length !== 4) {
     console.log("there should be 4 guesses");
     return;
@@ -117,7 +145,6 @@ function submitAnswer() {
   let matchedCategory = null;
 
   for (const category of categories) {
-    console.log("reviewing ", category.name);
     let gotWholeCategory = true;
     for (const guess of currentlySelected) {
       if (!category.items.includes(guess)) {
@@ -173,6 +200,13 @@ function addEventListeners() {
   document
     .getElementById("submit-answer")
     ?.addEventListener("click", submitAnswer);
+
+  document
+    .getElementById("original-ux")
+    ?.addEventListener("click", () => setUx("original"));
+  document
+    .getElementById("new-ux")
+    ?.addEventListener("click", () => setUx("new"));
 }
 
 init();
