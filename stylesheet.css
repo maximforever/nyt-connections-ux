@@ -48,6 +48,18 @@ body {
   background: #5a594e;
   color: white;
 }
+.cell.selected.winning-yellow {
+  background: #fbd400;
+}
+.cell.selected.winning-green {
+  background: #b5e352;
+}
+.cell.selected.winning-blue {
+  background: #729eeb;
+}
+.cell.selected.winning-purple {
+  background: #bc70c4;
+}
 .cell.clicked {
   transform: scale(0.9);
 }

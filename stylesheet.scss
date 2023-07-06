@@ -51,6 +51,18 @@ body {
   &.selected {
     background: #5a594e;
     color: white;
+    &.winning-yellow {
+      background: #fbd400;
+    }
+    &.winning-green {
+      background: #b5e352;
+    }
+    &.winning-blue {
+      background: #729eeb;
+    }
+    &.winning-purple {
+      background: #bc70c4;
+    }
   }
 
   &.clicked {

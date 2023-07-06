@@ -18,10 +18,26 @@ const wordBank = [
     "Nuuk",
 ];
 const categories = [
-    ["Coca Cola", "Pepsi Cola", "Fanta", "Sprite"],
-    ["Fight Club", "Troy", "Ocean's Eleven", "Moneyball"],
-    ["Slug", "Ladder", "Tricycle", "Elephant"],
-    ["Paris", "Washington", "Bangkok", "Nuuk"],
+    {
+        name: "Soft drinks",
+        items: ["Coca Cola", "Pepsi Cola", "Fanta", "Sprite"],
+        color: "yellow",
+    },
+    {
+        name: "Movies starring Brad Pitt",
+        items: ["Fight Club", "Troy", "Ocean's Eleven", "Moneyball"],
+        color: "green",
+    },
+    {
+        name: "Things with legs",
+        items: ["Slug", "Ladder", "Tricycle", "Elephant"],
+        color: "blue",
+    },
+    {
+        name: "Capital cities",
+        items: ["Paris", "Washington", "Bangkok", "Nuuk"],
+        color: "purple",
+    },
 ];
 let currentlySelected = [];
 function shuffleArray(arr) {
@@ -39,7 +55,7 @@ function shuffleArray(arr) {
     }
 }
 function init() {
-    shuffleArray(wordBank);
+    //shuffleArray(wordBank);
     populateCellsWithWords();
     addEventListeners();
 }
@@ -55,7 +71,7 @@ function populateCellsWithWords() {
         }
     }
 }
-function applyBounce() {
+function applyBounce(gotWholeCategory, color = "") {
     const cells = document.querySelectorAll(".cell");
     let delay = 0;
     cells.forEach((cell) => {
@@ -63,7 +79,13 @@ function applyBounce() {
             currentlySelected.includes(cell.textContent)) {
             setTimeout(() => {
                 cell.classList.add("highlighted");
+                if (gotWholeCategory) {
+                    cell.classList.add(`winning-${color}`);
+                }
             }, delay);
+            setTimeout(() => {
+                cell.classList.remove("highlighted");
+            }, delay + 750);
             delay += 250;
         }
     });
@@ -73,19 +95,25 @@ function submitAnswer() {
         console.log("there should be 4 guesses");
         return;
     }
-    applyBounce();
+    let matchedCategory = null;
     for (const category of categories) {
+        console.log("reviewing ", category.name);
         let gotWholeCategory = true;
         for (const guess of currentlySelected) {
-            if (!category.includes(guess)) {
+            if (!category.items.includes(guess)) {
                 gotWholeCategory = false;
             }
         }
         if (gotWholeCategory) {
-            console.log("YOU GOT A CATEGORY!");
-            console.log(category);
-            break;
+            matchedCategory = category;
         }
+    }
+    if (matchedCategory !== null) {
+        applyBounce(true, matchedCategory.color);
+    }
+    else {
+        console.log("That guess isn't quite right");
+        applyBounce(false);
     }
 }
 function addEventListeners() {
