@@ -51,6 +51,7 @@ body {
   &.selected {
     background: #5a594e;
     color: white;
+
     &.winning-yellow {
       background: #fbd400;
     }
@@ -63,6 +64,22 @@ body {
     &.winning-purple {
       background: #bc70c4;
     }
+
+    &.losing-gray {
+      background-color: #7f7f7f;
+      color: white;
+    }
+
+    &.incorrect {
+      animation-name: shake;
+      animation-duration: 0.5s;
+    }
+  }
+
+  &.incorrect {
+    background: gray;
+    animation-name: shake;
+    animation-duration: 0.5s;
   }
 
   &.clicked {
@@ -133,5 +150,23 @@ body {
   }
   100% {
     transform: translateY(0);
+  }
+}
+
+@keyframes shake {
+  0% {
+    transform: translateX(4px);
+  }
+  25% {
+    transform: translateX(-4px);
+  }
+  50% {
+    transform: translateX(4px);
+  }
+  75% {
+    transform: translateX(-4px);
+  }
+  100% {
+    transform: translateY(0px);
   }
 }

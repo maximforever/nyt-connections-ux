@@ -63,7 +63,7 @@ function shuffleArray(arr: string[]) {
 }
 
 function init() {
-  shuffleArray(wordBank);
+  //shuffleArray(wordBank);
   populateCellsWithWords();
   addEventListeners();
 }
@@ -93,6 +93,18 @@ function populateCellsWithWords() {
   }
 }
 
+function applyShake() {
+  const cells = document.querySelectorAll(".cell");
+  cells.forEach((cell) => {
+    if (
+      cell.textContent !== null &&
+      currentlySelected.includes(cell.textContent)
+    ) {
+      cell.classList.add("incorrect");
+    }
+  });
+}
+
 function applyBounce(gotWholeCategory: boolean, color: string = "") {
   let delay = 0;
   const cells = document.querySelectorAll(".cell");
@@ -114,6 +126,18 @@ function applyBounce(gotWholeCategory: boolean, color: string = "") {
       }, delay + 750);
 
       delay += 250;
+
+      if (!gotWholeCategory) {
+        setTimeout(() => {
+          cell.classList.add("losing-gray");
+          cell.classList.add("incorrect");
+        }, 1100);
+
+        setTimeout(() => {
+          cell.classList.remove("losing-gray");
+          cell.classList.remove("incorrect");
+        }, 2000);
+      }
     }
   });
 }
