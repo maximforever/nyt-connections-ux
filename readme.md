@@ -2,14 +2,16 @@
 
 This app mocks the NYT [Connections](https://www.nytimes.com/games/connections) game and makes a small UX suggestion.
 
+**See it live at [https://nyt-connections-ux.web.app](https://nyt-connections-ux.web.app)**
+
 When a user correctly selects a whole category, the cards change color one by one as they bounce, rather than staying gray.
 
 ## Tech
 
-This is a HTML/SCSS/TS app, hosted on Firebase.
+This is a HTML/SCSS/TS app, hosted on Firebase. You want to edit the TS and SCSS files in `/src`, which are the compiled into `/public`.
 
-- `public/script.js` is compiled from `src/script.ts`
-- `public/stylesheet.css` is compiled from `src/stylesheet.scss`
+- `src/script.ts` compiles to `public/script.js`
+- `src/stylesheet.scss` compiles to `/public`
 
 To run:
 
