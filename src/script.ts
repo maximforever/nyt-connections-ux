@@ -63,7 +63,7 @@ function shuffleArray(arr: string[]) {
 }
 
 function init() {
-  //shuffleArray(wordBank);
+  shuffleArray(wordBank);
   populateCellsWithWords();
   addEventListeners();
 }

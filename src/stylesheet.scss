@@ -54,15 +54,19 @@ body {
 
     &.winning-yellow {
       background: #fbd400;
+      transition: background, 0.3s;
     }
     &.winning-green {
       background: #b5e352;
+      transition: background, 0.3s;
     }
     &.winning-blue {
       background: #729eeb;
+      transition: background, 0.3s;
     }
     &.winning-purple {
       background: #bc70c4;
+      transition: background, 0.3s;
     }
 
     &.losing-gray {
@@ -138,6 +142,21 @@ body {
 
   .one-checkbox {
     padding-bottom: 0.5rem;
+  }
+}
+
+@media screen and (max-width: 780px) {
+  #board {
+    width: 90vw;
+  }
+  .cell {
+    font-size: 2.2vw;
+    padding: 2.2vw;
+    box-sizing: border-box;
+  }
+
+  .row {
+    height: 22.5vw;
   }
 }
 

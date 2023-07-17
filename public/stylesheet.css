@@ -50,15 +50,19 @@ body {
 }
 .cell.selected.winning-yellow {
   background: #fbd400;
+  transition: background, 0.3s;
 }
 .cell.selected.winning-green {
   background: #b5e352;
+  transition: background, 0.3s;
 }
 .cell.selected.winning-blue {
   background: #729eeb;
+  transition: background, 0.3s;
 }
 .cell.selected.winning-purple {
   background: #bc70c4;
+  transition: background, 0.3s;
 }
 .cell.selected.losing-gray {
   background-color: #7f7f7f;
@@ -126,6 +130,19 @@ body {
   padding-bottom: 0.5rem;
 }
 
+@media screen and (max-width: 780px) {
+  #board {
+    width: 90vw;
+  }
+  .cell {
+    font-size: 2.2vw;
+    padding: 2.2vw;
+    box-sizing: border-box;
+  }
+  .row {
+    height: 22.5vw;
+  }
+}
 @keyframes bounce {
   0% {
     transform: translateY(0);
